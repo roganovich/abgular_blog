@@ -1,0 +1,32 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+      <b>Войти в панель администратора</b>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div [ngClass]="{invalid:form.get('inputEmail').touched && form.get('inputEmail').invalid}" class="mb-3">
+          <label for="inputEmail" class="form-label">Email</label>
+          <input type="email" class="form-control" id="inputEmail" formControlName="inputEmail" aria-describedby="emailHelp">
+          <div *ngIf="form.get('inputEmail').touched && form.get('inputEmail').invalid"class="alert  alert-danger">
+              <small *ngIf="form.get('inputEmail').errors.required">Это поле обязательно</small>
+              <small *ngIf="form.get('inputEmail').errors.email">Email не соответствует</small>
+          </div>
+        </div>
+        <div [ngClass]="{invalid:form.get('inputPassword').touched && form.get('inputPassword').invalid}" class="mb-3">
+          <label for="inputPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="inputPassword" formControlName="inputPassword" >
+          <div *ngIf="form.get('inputPassword').touched && form.get('inputPassword').invalid" class="alert  alert-danger">
+              <small *ngIf="form.get('inputPassword').errors.required">Это поле обязательно</small>
+              <small *ngIf="form.get('inputPassword').errors.minlength">Это поле не соответствует минимальной длине</small>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Войти</button>
+      </form>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+</div>
