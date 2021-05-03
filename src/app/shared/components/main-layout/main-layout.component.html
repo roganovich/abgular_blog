@@ -19,10 +19,14 @@
             <a class="nav-link active" aria-current="page" href="#">Главная</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/','post']">Страницы</a>
+            <a class="nav-link" [routerLink]="['/pages']">Страницы</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/admin','login']">Админка</a>
+          <li class="nav-item"  *ngIf="!auth.isAuth()">
+            <a class="nav-link" [routerLink]="['/admin/login']">Войти</a>
+          </li>
+
+          <li class="nav-item"  *ngIf="auth.isAuth()">
+            <a class="nav-link" [routerLink]="['/admin/dashboard']">Админка</a>
           </li>
 
           <li class="nav-item"  *ngIf="auth.isAuth()">

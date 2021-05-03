@@ -1,1 +1,47 @@
-<p>create-page works!</p>
+<div class="container-fluid">
+  <h2>Добавление новой страницы</h2>
+  <div class="row">
+    <div class="col-sm">
+
+      <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+        {{ error }}
+      </div>
+
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div [ngClass]="{invalid:form.get('inputTitle').touched && form.get('inputTitle').invalid}" class="mb-3">
+          <label for="inputTitle" class="form-label">Название</label>
+          <input type="email" class="form-control" id="inputTitle" formControlName="inputTitle">
+          <div *ngIf="form.get('inputTitle').touched && form.get('inputTitle').invalid"class="alert  alert-danger">
+              <small *ngIf="form.get('inputTitle').errors.required">Это поле обязательно</small>
+              <small *ngIf="form.get('inputTitle').errors.minlength">Это поле не соответствует</small>
+          </div>
+        </div>
+
+        <div [ngClass]="{invalid:form.get('inputSlug').touched && form.get('inputSlug').invalid}" class="mb-3">
+          <label for="inputSlug" class="form-label">SLUG</label>
+          <input type="email" class="form-control" id="inputSlug" formControlName="inputSlug">
+          <div *ngIf="form.get('inputSlug').touched && form.get('inputSlug').invalid"class="alert  alert-danger">
+              <small *ngIf="form.get('inputSlug').errors.required">Это поле обязательно</small>
+              <small *ngIf="form.get('inputSlug').errors.minlength">Это поле не соответствует</small>
+          </div>
+        </div>
+        <div [ngClass]="{invalid:form.get('inputSlug').touched && form.get('inputSlug').invalid}" class="mb-3">
+          <label for="inputBody" class="form-label">Текст</label>
+          <textarea rows="10"  class="form-control" id="inputBody" formControlName="inputBody" >
+          </textarea>
+          <div *ngIf="form.get('inputBody').touched && form.get('inputBody').invalid"class="alert alert-danger">
+              <small *ngIf="form.get('inputBody').errors.required">Это поле обязательно</small>
+              <small *ngIf="form.get('inputBody').errors.minlength">Это поле не соответствует</small>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid || submitted">Войти</button>
+      </form>
+    </div>
+    <div class="col-sm">
+
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+</div>

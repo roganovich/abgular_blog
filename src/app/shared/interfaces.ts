@@ -8,3 +8,11 @@ export interface AuthResponse{
   idToken: string,
   expiresIn: string
 }
+
+export interface Post {
+  id?: string,
+  title: string,
+  slug: string,
+  body: string,
+  date: Date,
+}

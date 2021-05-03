@@ -10,6 +10,10 @@
         {{ error }}
       </div>
 
+      <div class="alert alert-danger" *ngIf="loginAgain">
+        {{ loginAgain }}
+      </div>
+
       <form [formGroup]="form" (ngSubmit)="submit()">
         <div [ngClass]="{invalid:form.get('inputEmail').touched && form.get('inputEmail').invalid}" class="mb-3">
           <label for="inputEmail" class="form-label">Email</label>

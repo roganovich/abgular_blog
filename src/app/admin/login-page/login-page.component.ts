@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import {FormControl, FormGroup, Validators, } from '@angular/forms';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -14,14 +14,22 @@ export class LoginPageComponent implements OnInit {
 
   form: FormGroup
   submitted: boolean = false
+  loginAgain: string
 
   constructor(
     public auth: AuthService,
-    private route: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['loginAgain']){
+        this.loginAgain = "Необходимо ввести данные"
+      }
+    })
+
     this.form = new FormGroup({
       inputEmail: new FormControl(null,[
         Validators.email,
@@ -47,7 +55,7 @@ export class LoginPageComponent implements OnInit {
     this.auth.login(user).subscribe(()=>{
       this.form.reset()
       this.submitted = false
-      this.route.navigate(['/admin','dashboard'])
+      this.router.navigate(['/admin','dashboard'])
     }, () => {
       this.submitted = false
     })

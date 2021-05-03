@@ -19,7 +19,7 @@
             <a class="nav-link active" aria-current="page" [routerLink]="['/admin/dashboard']">Главная</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/admin/post/list']">Страницы</a>
+            <a class="nav-link" [routerLink]="['/admin/pages/list']">Страницы</a>
           </li>
           <li class="nav-item"  *ngIf="auth.isAuth()">
             <a class="nav-link" (click)="logout($event)">Выйти</a>

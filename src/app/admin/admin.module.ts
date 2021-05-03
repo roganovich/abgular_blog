@@ -4,13 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
-import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { EditPageComponent } from './pages/edit-page/edit-page.component';
-import { CreatePageComponent } from './pages/create-page/create-page.component';
-import { ListPagesComponent } from './pages/list-pages/list-pages.component';
-import {SharedModule} from '../shared/shared.module'
+import { AdminLayoutComponent } from 'src/app/admin/shared/components/admin-layout/admin-layout.component';
+import { LoginPageComponent } from 'src/app/admin/login-page/login-page.component';
+import { DashboardPageComponent } from 'src/app/admin/dashboard-page/dashboard-page.component';
+import { EditPageComponent } from 'src/app/admin/pages/edit-page/edit-page.component';
+import { CreatePageComponent } from 'src/app/admin/pages/create-page/create-page.component';
+import { ListPagesComponent } from 'src/app/admin/pages/list-pages/list-pages.component';
+import {SharedModule} from 'src/app/shared/shared.module'
+import { AuthGuard } from 'src/app/shared/services/auth.guard';
 
 
 @NgModule({
@@ -32,16 +33,16 @@ import {SharedModule} from '../shared/shared.module'
         path: '', component: AdminLayoutComponent, children: [
           {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
           {path: 'login', component: LoginPageComponent},
-          {path: 'dashboard', component: DashboardPageComponent},
-          {path: 'post/list', component: ListPagesComponent},
-          {path: 'post/create', component: CreatePageComponent},
-          {path: 'post/:id/edit', component: EditPageComponent}
+          {path: 'dashboard', component: DashboardPageComponent, canActivate:[AuthGuard]},
+          {path: 'pages/list', component: ListPagesComponent, canActivate:[AuthGuard]},
+          {path: 'pages/create', component: CreatePageComponent, canActivate:[AuthGuard]},
+          {path: 'pages/:id/edit', component: EditPageComponent, canActivate:[AuthGuard]}
         ]
       }
     ])
   ],
   exports: [RouterModule],
-  providers: [AuthService]
+  providers: [AuthService, AuthGuard]
 })
 export class AdminModule {
 }
