@@ -6,6 +6,10 @@
     </div>
     <div class="col-sm">
       <b>Войти в панель администратора</b>
+      <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+        {{ error }}
+      </div>
+
       <form [formGroup]="form" (ngSubmit)="submit()">
         <div [ngClass]="{invalid:form.get('inputEmail').touched && form.get('inputEmail').invalid}" class="mb-3">
           <label for="inputEmail" class="form-label">Email</label>
@@ -23,7 +27,7 @@
               <small *ngIf="form.get('inputPassword').errors.minlength">Это поле не соответствует минимальной длине</small>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Войти</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid || submitted">Войти</button>
       </form>
     </div>
     <div class="col-sm">

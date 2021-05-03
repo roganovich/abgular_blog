@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AuthSerice } from '../shared/services/auth.service'
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -11,6 +11,7 @@ import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { CreatePageComponent } from './pages/create-page/create-page.component';
 import { ListPagesComponent } from './pages/list-pages/list-pages.component';
 import {SharedModule} from '../shared/shared.module'
+
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import {SharedModule} from '../shared/shared.module'
     ])
   ],
   exports: [RouterModule],
-  providers: [AuthSerice]
+  providers: [AuthService]
 })
 export class AdminModule {
 }

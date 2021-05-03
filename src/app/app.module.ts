@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {SharedModule} from './shared/shared.module'
+import { AuthService } from 'src/app/shared/services/auth.service';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +26,7 @@ import { PostComponent } from './shared/components/post/post.component';
     AppRoutingModule,
     SharedModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

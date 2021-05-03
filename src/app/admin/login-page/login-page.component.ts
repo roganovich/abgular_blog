@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, FormGroup, Validators, } from '@angular/forms';
-import { User } from '../../shared/interfaces'
-import { AuthSerice } from '../../shared/services/auth.service'
+
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { User } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-login-page',
@@ -12,9 +13,10 @@ import { AuthSerice } from '../../shared/services/auth.service'
 export class LoginPageComponent implements OnInit {
 
   form: FormGroup
+  submitted: boolean = false
 
   constructor(
-    private auth: AuthSerice,
+    public auth: AuthService,
     private route: Router
   ) {
   }
@@ -34,17 +36,20 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit (){
-    console.log(this.form)
     if (this.form.invalid){
       return
     }
+    this.submitted = true
     const user: User = {
       email: this.form.value.inputEmail,
       password: this.form.value.inputPassword,
     }
     this.auth.login(user).subscribe(()=>{
       this.form.reset()
+      this.submitted = false
       this.route.navigate(['/admin','dashboard'])
+    }, () => {
+      this.submitted = false
     })
 
   }
