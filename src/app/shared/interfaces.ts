@@ -16,3 +16,7 @@ export interface Post {
   body: string,
   date: Date,
 }
+
+export interface DataResponse {
+  name: string
+}

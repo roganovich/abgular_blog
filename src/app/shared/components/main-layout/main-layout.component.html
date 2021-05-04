@@ -30,7 +30,7 @@
           </li>
 
           <li class="nav-item"  *ngIf="auth.isAuth()">
-            <a class="nav-link " (click)="auth.logout($event)">Выйти</a>
+            <a class="nav-link " (click)="logout($event)">Выйти</a>
           </li>
         </ul>
       </div>

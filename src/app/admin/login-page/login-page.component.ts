@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit {
 
   form: FormGroup
   submitted: boolean = false
-  loginAgain: string
+  loginMessage: string
 
   constructor(
     public auth: AuthService,
@@ -26,7 +26,9 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['loginAgain']){
-        this.loginAgain = "Необходимо ввести данные"
+        this.loginMessage = "Необходимо ввести данные"
+      }else if(params['loginIsOver']){
+        this.loginMessage = "Сессия истекла. Необходимо ввести данные заново"
       }
     })
 

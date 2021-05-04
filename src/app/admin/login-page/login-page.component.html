@@ -6,12 +6,12 @@
     </div>
     <div class="col-sm">
       <b>Войти в панель администратора</b>
-      <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
-        {{ error }}
+      <div class="alert alert-danger" *ngIf="auth.errors$ | async as errors">
+        {{ errors }}
       </div>
 
-      <div class="alert alert-danger" *ngIf="loginAgain">
-        {{ loginAgain }}
+      <div class="alert alert-danger" *ngIf="loginMessage">
+        {{ loginMessage }}
       </div>
 
       <form [formGroup]="form" (ngSubmit)="submit()">

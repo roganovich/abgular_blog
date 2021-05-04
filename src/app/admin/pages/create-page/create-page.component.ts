@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators, } from '@angular/forms';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Post, User } from 'src/app/shared/interfaces';
+import { PostService } from 'src/app/shared/services/posts.service';
 
 @Component({
   selector: 'app-create-page',
@@ -17,7 +18,8 @@ export class CreatePageComponent implements OnInit {
   constructor(
       public auth: AuthService,
       private router: Router,
-      private route: ActivatedRoute
+      private route: ActivatedRoute,
+      private postService: PostService
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +52,9 @@ export class CreatePageComponent implements OnInit {
     }
     console.log(this.form)
 
+    this.postService.create(post).subscribe( () => {
+      this.form.reset()
+    })
 
   }
 
